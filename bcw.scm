@@ -44,9 +44,9 @@
 (define freq 2600)
 (define volume 1.0)
 (define millisecond (/ s-per-sec 1000))
-(define sp-count 250) 
+(define sp-count 260) 
 (define dot-count 60)
-(define dash-count 240)
+(define dash-count 200)
 (define inter-char 150)
 (define msg (string->list (cadr (command-line-arguments))))
 (print "msg:" msg)
@@ -76,9 +76,9 @@
                    `(,(* volume (sin (/ (* *pi_2
                                            freq
                                            fr-cnt)
-                                        s-per-sec)))))))))))
+                                        s-per-sec)))))))))
       (do-times i inter-char
-            (wr h (list->f32vector '(0.0)))))
+            (wr h (list->f32vector '(0.0)))))))
   (when (>= (length x) 1)
       (get-char-wav-seq wr h (cdr x))))
 (define (make-wav wr h m)
