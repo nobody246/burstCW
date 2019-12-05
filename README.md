@@ -4,7 +4,7 @@ Same idea as seen here https://cryptomuseum.com/burst/index.htm
 
 csi bcw.scm "MSG IN CAPS" - writes over burstCW.wav with encoded CW message.
 
-rx.sh 'playback speed' - plays back burstCW.wav at given playback speed, i.e, 0.1 to 0.2 are decent playback speed values to pass this script.
+rx.sh Generates slowed down sound file (burstCWSlowed0.1.wav)
 
 
 
