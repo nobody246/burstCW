@@ -4,7 +4,7 @@ Same idea as seen here https://cryptomuseum.com/burst/index.htm
 
 csi bcw.scm "MSG IN CAPS" - writes over burstCW.wav with encoded CW message.
 
-rx.sh Generates slowed down sound file (burstCWSlowed0.1.wav)
+rx.sh Generates slowed down sound file (burstCWSlowed.wav)
 
 
 
