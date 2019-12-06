@@ -38,16 +38,15 @@
                       "---.."
                       "----."
                       " "))
-(define file-copy "burstCW.wav")
+(define out-file "burstCW.wav")
 (define s-per-sec 11025)
 (define chans 1)
 (define freq 2600)
 (define volume 1.0)
-(define millisecond (/ s-per-sec 1000))
 (define sp-count 26) 
 (define dot-count 6)
 (define dash-count 20)
-(define inter-char 15)
+(define interchar-count 15)
 (define msg (string->list (cadr (command-line-arguments))))
 (print "msg:" msg)
 (define fr-cnt 0)
@@ -64,20 +63,18 @@
     (cond
      ((eq? y #\space)
       (do-times i sp-count
-        (begin
-          (set! fr-cnt (add1 fr-cnt))
-          (wr h (list->f32vector '(0.0))))))
+                (set! fr-cnt (add1 fr-cnt))
+                (wr h (list->f32vector '(0.0)))))
      ((or (eq? y #\.) (eq? y #\-))
       (let ((d (if (eq? y #\.) dot-count dash-count)))
         (do-times i d
-          (begin
-            (set! fr-cnt (add1 fr-cnt))
-            (wr h (list->f32vector
-                   `(,(* volume (sin (/ (* *pi_2
-                                           freq
-                                           fr-cnt)
-                                        s-per-sec)))))))))
-      (do-times i inter-char
+                  (set! fr-cnt (add1 fr-cnt))
+                  (wr h (list->f32vector
+                         `(,(* volume (sin (/ (* *pi_2
+                                                 freq
+                                                 fr-cnt)
+                                              s-per-sec))))))))
+      (do-times i interchar-count
             (wr h (list->f32vector '(0.0)))))))
   (when (>= (length x) 1)
       (get-char-wav-seq wr h (cdr x))))
@@ -86,14 +83,13 @@
       (get-char-wav-seq
        wr
        h
-       (string->list (list-ref alpha-codes
-                               x))))
+       (string->list (list-ref alpha-codes x))))
   (do-times i sp-count
             (wr h (list->f32vector '(0.0))))
   (when (not (null? m))
     (make-wav wr h (if (null? m) m (cdr m)))))
 (with-sound-to-file
- file-copy
+ out-file
  '(wav pcm-16 file)
  s-per-sec
  chans
