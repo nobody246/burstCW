@@ -49,7 +49,7 @@
 (define interchar-count 15)
 (define msg (string->list (cadr (command-line-arguments))))
 (print "msg:" msg)
-(define fr-cnt 0)
+(define fr-count 0)
 (define (ch l k #!optional (i 0))
   (if (eq? (car l) k)
       i
@@ -63,16 +63,16 @@
     (cond
      ((eq? y #\space)
       (do-times i sp-count
-                (set! fr-cnt (add1 fr-cnt))
+                (set! fr-count (add1 fr-count))
                 (wr h (list->f32vector '(0.0)))))
      ((or (eq? y #\.) (eq? y #\-))
       (let ((d (if (eq? y #\.) dot-count dash-count)))
         (do-times i d
-                  (set! fr-cnt (add1 fr-cnt))
+                  (set! fr-count (add1 fr-count))
                   (wr h (list->f32vector
                          `(,(* volume (sin (/ (* *pi_2
                                                  freq
-                                                 fr-cnt)
+                                                 fr-count)
                                               s-per-sec))))))))
       (do-times i interchar-count
             (wr h (list->f32vector '(0.0)))))))
