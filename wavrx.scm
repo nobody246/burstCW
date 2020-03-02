@@ -7,21 +7,15 @@
 (define fo (file-open file-out
                       (+ open/rdwr open/creat open/trunc open/binary)
                       (+ perm/irusr perm/iwusr)))
-(define output-mode #t)
-(define header-bytes (file-read f 44))
-(define header-data (car header-bytes))
-(define header-length (cadr header-bytes))
 (bitmatch
- header-data
+ (car (file-read f 44))
  (((chunk-id 32 bitstring)
    (chunk-size 32 little unsigned)
    (riff-type 32 bitstring)
    (fmt-chunk-id 32 bitstring)
    (fmt-chunk-size 32 little unsigned)
    (fmt-chunk-compression-type 16 little unsigned)
-   (check (= fmt-chunk-compression-type 1))
    (fmt-chunk-channels 16 little unsigned)
-   (check (= fmt-chunk-channels 1))
    (fmt-chunk-slice-rate 32 little unsigned)
    (fmt-chunk-data-rate 32 little unsigned)
    (fmt-chunk-block-alignment 16 little unsigned)
