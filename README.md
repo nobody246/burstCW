@@ -4,9 +4,11 @@ Same idea as seen here https://cryptomuseum.com/burst/index.htm
 
 csi bcw.scm "MSG IN CAPS" - writes over burstCW.wav with encoded CW message.
 
-rx.sh Generates slowed down sound file (burstCWSlowed.wav)
+wavrx.sh #SLOWDOWN burstCWSlowed.wav given number of times and play it back
+
+i.e, "./wavrx.sh 85" will slow burstCW.wav 85 times in burstCWSlowed.wav and then play the slowed audio back.
 
 
 
 
-rx.sh works well/best with a 11025Hz sample rate for burstCW.wav
+
