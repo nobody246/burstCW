@@ -2,6 +2,8 @@
 (define file-in "burstCW.wav")
 (define file-out "burstCWSlowed.wav")
 (define slowdown-x (string->number (car (reverse (command-line-arguments)))))
+(when (not slowdown-x)
+  (set! slowdown-x 80))
 (define f (file-open file-in
                      (+ open/read open/binary)))
 (define fo (file-open file-out
