@@ -9,7 +9,6 @@
 (define fo (file-open file-out
                       (+ open/rdwr open/creat open/trunc open/binary)
                       (+ perm/irusr perm/iwusr)))
-(define inc-volume #f)
 (bitmatch
  (car (file-read f 44))
  (((chunk-id 32 bitstring)
