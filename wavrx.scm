@@ -24,9 +24,8 @@
    (fmt-chunk-sample-depth 16 little unsigned)
    (data-chunk-id 32 bitstring)
    (data-chunk-size 32 little unsigned))
-  (let ((new-slice-rate (inexact->exact (round (/ fmt-chunk-slice-rate slowdown-x)))))
-     (print "Slowing down " fmt-chunk-slice-rate " by "
-            slowdown-x " times, new rate is " new-slice-rate)
+  (let ((new-slice-rate (inexact->exact (round (/ fmt-chunk-slice-rate slowdown-x))))
+        (new-chunk-data-rate (inexact->exact (round (/ fmt-chunk-data-rate slowdown-x)))))
      (file-write
       fo
       (bitstring->blob
@@ -39,7 +38,7 @@
         (fmt-chunk-compression-type 16 little unsigned)
         (fmt-chunk-channels 16 little unsigned)
         (new-slice-rate 32 little unsigned)
-        (fmt-chunk-data-rate 32 little unsigned)
+        (new-chunk-data-rate 32 little unsigned)
         (fmt-chunk-block-alignment 16 little unsigned)
         (fmt-chunk-sample-depth 16 little unsigned)
         (data-chunk-id  bitstring)
