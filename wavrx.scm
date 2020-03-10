@@ -9,6 +9,7 @@
 (define fo (file-open file-out
                       (+ open/rdwr open/creat open/trunc open/binary)
                       (+ perm/irusr perm/iwusr)))
+(define inc-volume #f)
 (bitmatch
  (car (file-read f 44))
  (((chunk-id 32 bitstring)
@@ -42,8 +43,7 @@
         (fmt-chunk-block-alignment 16 little unsigned)
         (fmt-chunk-sample-depth 16 little unsigned)
         (data-chunk-id  bitstring)
-        (data-chunk-size
-         32 little unsigned)))))))
+        (data-chunk-size 32 little unsigned)))))))
 (file-write fo (car (file-read f (- (file-size f) 44))))
 (file-close fo)
 (file-close f)
