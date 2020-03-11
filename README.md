@@ -2,7 +2,7 @@
 
 Same idea as seen here https://cryptomuseum.com/burst/index.htm
 
-csi bcw.scm "MSG IN CAPS" - writes over burstCW.wav with encoded CW message.
+csi bcw.scm "AlPhAnUmErIc test StRiNg 012345678" - writes over burstCW.wav with encoded CW message.
 
 play.sh #SLOWDOWN burstCWSlowed.wav given number of times and play it back
 
