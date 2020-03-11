@@ -13,3 +13,4 @@ To reverse a file:
 
 
 
+wavrx.scm file in.wav o out.wav [slow (# of times to slow sound)] [reverse]
