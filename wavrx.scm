@@ -5,6 +5,7 @@
 (define args `(,(member "slow" cli)
                ,(member "file" cli)
                ,(member "o" cli)))
+(define samp-depth #f)
 (define file-in #f)
 (define file-out #f)
 (define slowdown-x 1)
@@ -47,6 +48,7 @@
    (data-chunk-size 32 little unsigned))
   (let ((new-slice-rate (inexact->exact (round (/ fmt-chunk-slice-rate slowdown-x))))
         (new-chunk-data-rate (inexact->exact (round (/ fmt-chunk-data-rate slowdown-x)))))
+     (set! samp-depth (/ fmt-chunk-sample-depth 8))
      (file-write
       fo
       (bitstring->blob
@@ -70,7 +72,7 @@
       (for-each
        (lambda (x)
          (set! sample (append sample `(,x)))
-         (when (= (length sample) 2)
+         (when (= (length sample) samp-depth)
            (set! new-list (append sample new-list))
            (set! sample '())))
        (string->list (car (file-read f (- (file-size f) 44)))))
