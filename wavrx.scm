@@ -1,6 +1,4 @@
 (use bitstring posix)
-;(define file-in "forward.wav")
-;(define file-out "reversed.wav")
 (define cli (command-line-arguments))
 (define args `(,(member "slow" cli)
                ,(member "file" cli)
