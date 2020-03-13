@@ -23,8 +23,12 @@
          ((file) (check x) (set! file-in  (cadr x)))
          ((o)    (check x) (set! file-out (cadr x))))))
    args))
-(when (or (not file-in) (not file-out))
+(when (or (not file-in)
+          (not file-out))
   (usage))
+(when (not (regular-file? file-in))
+  (printf "error: file ~A does not exist.\n" file-in)
+  (exit))
 (define f (file-open file-in
                      (+ open/read open/binary)))
 (define fo (file-open file-out
@@ -38,7 +42,9 @@
    (fmt-chunk-id 32 bitstring)
    (fmt-chunk-size 32 little unsigned)
    (fmt-chunk-compression-type 16 little unsigned)
+   (check (= fmt-chunk-compression-type 1))
    (fmt-chunk-channels 16 little unsigned)
+   (check (= fmt-chunk-channels 1))
    (fmt-chunk-slice-rate 32 little unsigned)
    (fmt-chunk-data-rate 32 little unsigned)
    (fmt-chunk-block-alignment 16 little unsigned)
@@ -64,7 +70,13 @@
         (fmt-chunk-block-alignment 16 little unsigned)
         (fmt-chunk-sample-depth 16 little unsigned)
         (data-chunk-id  bitstring)
-        (data-chunk-size 32 little unsigned)))))))
+        (data-chunk-size 32 little unsigned))))))
+ (else
+  (print "Incorrectly formatted WAV, or invalid file format detected."
+         "Please input a properly formatted single channel PCM WAV.")
+  (file-close fo)
+  (file-close f)
+  (exit)))
 (if rev
     (let ((new-list '())
           (sample '()))
